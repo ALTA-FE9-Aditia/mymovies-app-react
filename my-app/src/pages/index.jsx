@@ -25,11 +25,11 @@ class App extends Component {
     this.setState({ loading: true });
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/now_playing?api_key=5f2a86d372a9911a3c60f7df976b2522&language=en-US&page=${this.state.page}`
+        `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_KEY}&language=en-US&page=${this.state.page}`
       )
       .then((res) => {
         const { results } = res.data;
-        // console.log(results);
+        console.log(results);
         const newPage = this.state.page + 1;
 
         const temp = [...this.state.datas];
@@ -52,12 +52,7 @@ class App extends Component {
           {this.state.loading
             ? this.state.skeleton.map((item) => <Loading key={item} />)
             : this.state.datas.map((data) => (
-                <Card
-                  key={data.id}
-                  image={data.poster_path}
-                  title={data.title}
-                  judul={data.title}
-                />
+                <Card key={data.id} image={data.poster_path} title={data.title} />
               ))}
         </div>
         <ButtonSecondary label="Load More" onClick={() => this.fetchData()} />

@@ -19,7 +19,7 @@ export class ButtonSecondary extends Component {
     return (
       <button
         style={{ backgroundColor: '#2aa6b1', color: 'white' }}
-        className="hover:tracking-wide p-2 text-4xl font-bebas mt-9 mb-6 w-1/3 h-16 border cursor-pointer rounded-xl bg-white  text-center text-3xl"
+        className="hover:tracking-wide p-2 text-5xl font-bebas mt-9 mb-6 w-1/3 h-16 border cursor-pointer rounded-xl bg-white  text-center text-4xl"
         onClick={this.props.onClick}
       >
         {this.props.label}
