@@ -1,53 +1,54 @@
-import { Component } from 'react';
-import Container from '../components/Container';
+import React, { Component } from 'react';
 
-class Favorite extends Component {
+import FavContainer from '../components/FavContaienr';
+import Loading from '../components/Loading';
+import Card from '../components/Card';
+
+class App extends Component {
+  // constructor strart
+  // decalre state,harus ada di bawah class app
+  state = {
+    title: '',
+    datas: [],
+    skeleton: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    loading: true,
+  };
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData() {
+    this.setState({ loading: true });
+    let dataTemp = [];
+    for (let i = 0; i < 3; i++) {
+      const temp = {
+        id: i + i,
+        title: `Film title ${i + 1}`,
+        image:
+          'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR5EklUdiZB-syDPm-2m1FtlO1abOscjVlab5V55oK_THuSNYI0',
+      };
+      dataTemp.push(temp);
+    }
+
+    setTimeout(() => {
+      this.setState({ loading: false, datas: dataTemp });
+    }, 2000);
+  }
+
   render() {
     return (
-      <Container>
-        <div class="grid grid-cols-1  mt-7 mx-16  md:mx-14   md:grid-cols-5 md:mt-14 w-full">
-          <div>
-            <img
-              class="w-80 h-90 rounded-lg"
-              src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR5EklUdiZB-syDPm-2m1FtlO1abOscjVlab5V55oK_THuSNYI0"
-              alt="Sunset in the mountains"
-            />
-          </div>
-          <div class=" col-span-3 space-y-4 text-white md:mt-0 mt-7  md:ml-16 w-full">
-            <p className="text-3xl">FLIPPED</p>
-            <p className="italic">Jodoh ga ada yang tau. </p>
-            <p class="border-b-2">Genre: Cinta2an.</p>
-            <p class="border-b-2">Realese Date: 11 August 2010</p>
-            <p class="border-b-2">Duration: 1 hour 41 minute</p>
-            <p class="border-b-2">Popularity : 6379.598</p>
-            <p class="border-b-2 break-words pr-1">
-              Production Companies : Lionsgate,Capstone Pictures,BuzzFeed Studios,Tea Shop
-              Productions,Capstone Studios
-            </p>
-            <p class="border-b-2">Status: Released</p>
-            <p class="border-b-2">Original Language : English</p>
-            <p class="border-b-2">Budget: $3,000,000</p>
-            <p class="border-b-2">Revenue:$11,900,000</p>
-          </div>
+      <FavContainer>
+        <p>{this.state.title} </p>
+        <div className="grid grid-cols-1 md:grid-cols-5 lg:grid:cols-5 gap-10 md:mt-14 md:mx-14">
+          {this.state.loading
+            ? this.state.skeleton.map((item) => <Loading key={item} />)
+            : this.state.datas.map((data) => (
+                <Card key={data.id} image={data.image} title={data.title} judul={data.title} />
+              ))}
         </div>
-
-        <div class="grid grid-cols-1  mt-7 mx-16  md:mx-14   md:grid-cols-5 md:mt-10  text-white">
-          <div class="col-start-1 text-2xl">
-            <p>Overview</p>
-          </div>
-        </div>
-        <div class="grid grid-cols-1  mt-7 mx-16  md:mx-14   md:grid-cols-1 md:mt-2 md:mr-44  text-white">
-          <p>
-            For best friends Becky and Hunter, life is all about conquering fears and pushing
-            limits. But after they climb 2,000 feet to the top of a remote, abandoned radio tower,
-            they find themselves stranded with no way down. Now Becky and Hunter’s expert climbing
-            skills will be put to the ultimate test as they desperately fight to survive the
-            elements, a lack of supplies, and vertigo-inducing heights
-          </p>
-        </div>
-      </Container>
+      </FavContainer>
     );
   }
 }
-
-export default Favorite;
+export default App;
