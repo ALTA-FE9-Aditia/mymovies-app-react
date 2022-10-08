@@ -17,12 +17,10 @@ const Detail = (props) => {
   }, [data]);
   return (
     <Container>
-      <div className="text-white">
+      <div className="text-black">
         <img
-          // className="w-64 h-80"
-          src={`https://image.tmdb.org/t/p/w500${data?.poster_path}`}
-          alt={props.title}
-        />
+     
+          src={`https://image.tmdb.org/t/p/w500${data?.poster_path}`} alt={props.title}/>
         <p>{data?.title}</p>
         <p>{data?.overview}</p>
         {videos.map((video) => (

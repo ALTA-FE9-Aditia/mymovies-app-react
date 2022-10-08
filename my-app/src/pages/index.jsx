@@ -5,6 +5,7 @@ import axios from 'axios';
 import { ButtonSecondary } from 'components/Button';
 import { WithRouter } from 'utils/Navigation';
 import { useState, useEffect } from 'react';
+import { data } from 'autoprefixer';
 
 function App(props) {
   // cosntructor start
@@ -61,16 +62,18 @@ function App(props) {
       });
   }
 
-  function handleFav(movie) {
+  function addFav(movie) {
     // console.log(movie.title)
     // bikin logic supaya ga ada duplikasi difav,klo udah ada film nya kasih alert.
     // klo ga ada push ke parsedMovies,klo ada kasih alert
     // pake method .find()by id
     /**if movie.id === data.id */
     // di dalam browser locar storage ada value dan key,keynya dikasih nama
+
     // favMovies
     const getMovies = localStorage.getItem('favMovies');
 
+    // if (movie.id === data.id) {
     if (getMovies) {
       const parsedMovies = JSON.parse(getMovies);
       parsedMovies.push(movie);
@@ -84,8 +87,7 @@ function App(props) {
 
   return (
     <Container>
-      {/* <p>{title} </p> */}
-      <div className="w-full flex flex-col">
+      <div className="w-full flex flex-col text-center">
         <div className="grid grid-cols-1 md:grid-cols-5 lg:grid:cols-5 gap-5 md:mt-14 md:mx-10">
           {loading
             ? skeleton.map((item) => <Loading key={item} />)
@@ -95,11 +97,11 @@ function App(props) {
                   image={data.poster_path}
                   title={data.title}
                   onNavigate={() => props.navigate(`/detail/${data.id}`)}
-                  addFavorite={() => handleFav(data)}
+                  addFavorite={() => addFav(data)}
                 />
               ))}
         </div>
-        <ButtonSecondary label="Load More" onClick={() => this.fetchData()} />
+        <ButtonSecondary label="Load More" onClick={() => fetchData()} />
       </div>
     </Container>
   );

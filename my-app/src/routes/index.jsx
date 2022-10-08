@@ -15,7 +15,14 @@ function App() {
         <Route path="/detail/:id_movie" element={<Detail />} />
         <Route path="/sandbox" element={<Example />} />
         <Route path="/favorites" element={<Favorite />} />
-        <Route path="*" element={<div>404 Error Not Found</div>} />
+        <Route
+          path="*"
+          element={
+            <NotFound>
+              <div>404 Error Not Found</div>
+            </NotFound>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
