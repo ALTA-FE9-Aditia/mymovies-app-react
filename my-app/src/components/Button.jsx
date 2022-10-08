@@ -1,31 +1,27 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 
-export class ButtonPrimary extends Component {
-  render() {
-    return (
-      <button
-        className="p-3  border cursor-pointer bg-netflix-red text-white 
+const ButtonPrimary = (props) => {
+  return (
+    <button
+      className="p-2  mb-0 border cursor-pointer bg-netflix-red text-white 
       text-center "
-        onClick={this.props.onClick}
-      >
-        {this.props.label}
-      </button>
-    );
-  }
-}
+      onClick={props.onClick}
+    >
+      <p className="hover:tracking-wide text-xl"> {props.label}</p>
+    </button>
+  );
+};
 
-export class ButtonSecondary extends Component {
-  render() {
-    return (
-      <button
-        style={{ backgroundColor: '#2aa6b1', color: 'white' }}
-        className="hover:tracking-wide p-2 text-5xl font-bebas mt-9 mb-6 w-1/3 h-16 border cursor-pointer rounded-xl bg-white  text-center text-4xl"
-        onClick={this.props.onClick}
-      >
-        {this.props.label}
-      </button>
-    );
-  }
-}
+const ButtonSecondary = (props) => {
+  return (
+    <button
+      style={{ backgroundColor: '#2aa6b1', color: 'white' }}
+      className="hover:tracking-wide p-2 text-5xl font-bebas mt-9 mb-6 w-1/3 h-16 border cursor-pointer rounded-xl bg-white  text-center "
+      onClick={props.onClick}
+    >
+      {props.label}
+    </button>
+  );
+};
 
-export default ButtonPrimary;
+export { ButtonPrimary, ButtonSecondary };

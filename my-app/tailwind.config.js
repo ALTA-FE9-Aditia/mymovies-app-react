@@ -11,6 +11,10 @@ module.exports = {
         'bg-tr': '#134c51',
         'bg-nav': '#175b61',
       },
+      backgroundImage: {
+        'hero-pattern': "url('/img/hero-pattern.svg')",
+        'footer-texture': "url('/img/footer-texture.png')",
+      },
     },
   },
   plugins: [],

@@ -1,54 +1,52 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
+import { WithRouter } from 'utils/Navigation';
+import FavContainer from 'components/FavContaienr';
+import Loading from 'components/Loading';
+import Card from 'components/Card';
+import { useTitle } from 'utils/hooks/useTitle.js';
 
-import FavContainer from '../components/FavContaienr';
-import Loading from '../components/Loading';
-import Card from '../components/Card';
+function favorites() {
+  const [datas, setDatas] = useState([]);
+  const [skeleton] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  const [loading, setLoading] = useState(true);
+  useTitle('My favorite movies');
 
-class App extends Component {
-  // constructor strart
-  // decalre state,harus ada di bawah class app
-  state = {
-    title: '',
-    datas: [],
-    skeleton: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    loading: true,
-  };
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  componentDidMount() {
-    this.fetchData();
-  }
-
-  fetchData() {
-    this.setState({ loading: true });
-    let dataTemp = [];
-    for (let i = 0; i < 3; i++) {
-      const temp = {
-        id: i + i,
-        title: `Film title ${i + 1}`,
-        image:
-          'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR5EklUdiZB-syDPm-2m1FtlO1abOscjVlab5V55oK_THuSNYI0',
-      };
-      dataTemp.push(temp);
+  function fetchData() {
+    const getMovies = localStorage.getItem('favMovies');
+    if (getMovies) {
+      const parsedMovies = JSON.parse(getMovies);
+      setDatas(parsedMovies);
+      setLoading(false);
     }
-
-    setTimeout(() => {
-      this.setState({ loading: false, datas: dataTemp });
-    }, 2000);
   }
 
-  render() {
-    return (
-      <FavContainer>
-        <p>{this.state.title} </p>
-        <div className="grid grid-cols-1 md:grid-cols-5 lg:grid:cols-5 gap-10 md:mt-14 md:mx-14">
-          {this.state.loading
-            ? this.state.skeleton.map((item) => <Loading key={item} />)
-            : this.state.datas.map((data) => (
-                <Card key={data.id} image={data.image} title={data.title} judul={data.title} />
-              ))}
-        </div>
-      </FavContainer>
-    );
-  }
+  // RemoveFav() {
+  //   // hapus film dari elemn fav,pake filter
+  //   // Setelah difilter rubah statenya(this.state.datas) dengan yang sudah difilter dan juga
+  //   // localStorage.setItem lagi dengan value yang sudah di filter sebelumnya
+  // }
+
+  return (
+    <FavContainer>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid:cols-5 gap-4 md:mt-14 md:mx-14">
+        {loading
+          ? skeleton.map((item) => <Loading key={item} />)
+          : datas.map((data) => (
+              <Card
+                key={data.id}
+                image={data.poster_path}
+                title={data.title}
+                onNavigate={() => this.props.navigate(`/detail/${data.id}`)}
+                //  belum terimplementasi
+                addFavorite={() => this.RemoveFav(data)}
+              />
+            ))}
+      </div>
+    </FavContainer>
+  );
 }
-export default App;
+export default WithRouter(favorites);
