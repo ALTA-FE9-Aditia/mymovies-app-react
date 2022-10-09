@@ -5,15 +5,21 @@ import FavContainer from "components/FavContaienr";
 import Loading from "components/Loading";
 import CardFav from "components/CardFav";
 
-function Favorites() {
+function Favorite() {
   const [datas, setDatas] = useState([]);
   const [skeleton] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   useTitle("My favorite movies");
 
   useEffect(() => {
     fetchData();
   }, []);
+
+  const delFav = (movie) => {
+    const del = datas.filter((e) => e !== movie);
+    setDatas(del);
+    localStorage.setItem("favMovies", del);
+  };
 
   function fetchData() {
     const getMovies = localStorage.getItem("favMovies");
@@ -23,12 +29,6 @@ function Favorites() {
       setLoading(false);
     }
   }
-
-  const delFav = (movie) => {
-    const del = datas.filter((e) => e !== movie);
-    setDatas(del);
-    localStorage.setItem("favMovies", del);
-  };
 
   return (
     <FavContainer>
@@ -41,11 +41,11 @@ function Favorites() {
                 image={data.poster_path}
                 title={data.title}
                 onNavigate={() => this.props.navigate(`/detail/${data.id}`)}
-                addFavorite={() => delFav(data)}
+                delFavorite={() => delFav(data)}
               />
             ))}
       </div>
     </FavContainer>
   );
 }
-export default WithRouter(Favorites);
+export default WithRouter(Favorite);

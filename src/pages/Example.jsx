@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import Container from '../components/Container';
+import React, { useState, useEffect } from "react";
+import Container from "../components/Container";
 
 function Example() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  // state = {
-  //   email: '',
-  //   password: '',
-  // };
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <Container>
       <p>{email}</p>

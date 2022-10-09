@@ -1,6 +1,6 @@
-import React from 'react';
-import { ButtonPrimary } from './Button';
-const Card = (props) => {
+import React from "react";
+import { ButtonPrimary } from "./Button";
+const CardFav = (props) => {
   return (
     <div className="flex mt-10 flex-col justify-center pb-0 bg-white shadow-lg border w-48">
       <div className="w-full h-full" onClick={props.onNavigate}>
@@ -9,11 +9,11 @@ const Card = (props) => {
           src={`https://image.tmdb.org/t/p/w500${props.image}`}
           alt={props.title}
         />
-        <p className="font-bold">{props.title}</p>
+        <p className="font-bold  text-center">{props.title}</p>
       </div>
-      <ButtonPrimary label="+Add Movie" onClick={props.addFavorite} />
+      <ButtonPrimary label="Delete" onClick={props.delFavorite} />
     </div>
   );
 };
 
-export default Card;
+export default CardFav;
