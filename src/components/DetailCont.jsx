@@ -11,7 +11,7 @@ const DetContainer = (props) => {
 
             <Link to="/">
               <div className="cursor-pointer ml-14 text-6xl text-white mr-32 font-bebas font-bold">
-                <p>GO HOME </p>
+                <p>BACK HOME </p>
               </div>
             </Link>
           </div>

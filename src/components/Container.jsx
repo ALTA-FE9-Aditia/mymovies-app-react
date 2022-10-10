@@ -1,11 +1,16 @@
-import React from "react";
 import house from "assets/cinema.png";
 import favMovie from "assets/favMovie.svg";
+import darkIc from "assets/dark_theme.svg";
 import { Link } from "react-router-dom";
-
-const Container = (props) => {
+// import { useContext } from "react";
+import { ThemeContext } from "utils/context";
+import React, { useContext } from "react";
+import { ButtonPrimary } from "./Button";
+import { ButtonDarkMode } from "./Button";
+const Container = ({ children }) => {
+  const { isLight, setIsLight } = useContext(ThemeContext);
   return (
-    <div className="w-full h-screen  bg-black text-center ">
+    <div className="w-full h-screen   text-center ">
       <nav
         style={{ backgroundColor: "#08231f" }}
         className="w-full    sticky top-0 flex flex-col md:flex-row   "
@@ -17,14 +22,21 @@ const Container = (props) => {
 
         <div className="w-1/2  pt-7  sticky top-0 flex flex-col justify-center md:flex-row gap-3 ">
           <Link to="/favorites">
-            <p className="text-white text-4xl font-bebas font-extrabold mt-2"> Your Picks HEre</p>
+            <p className="text-white text-4xl font-bebas font-extrabold mt-2"> Your Picks Here</p>
           </Link>
           <Link to="/favorites">
             <img className="w-18 h-16 " src={favMovie} alt="house-ic" />
           </Link>
+          <ButtonDarkMode
+            label={isLight ? "Light" : "Dark"}
+            onClick={() => setIsLight(!isLight)}
+            // img={darkIc}
+          ></ButtonDarkMode>
         </div>
       </nav>
-      <div className="w-full h-full overflow-auto  bg-bg-tr ">{props.children}</div>
+      <div className="w-full h-full overflow-auto  bg-bg-tr dark:bg-black overflow-auto">
+        {children}
+      </div>
     </div>
   );
 };

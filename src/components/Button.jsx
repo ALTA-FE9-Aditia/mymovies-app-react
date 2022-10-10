@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 const ButtonPrimary = (props) => {
   return (
     <button
-      className="p-2  border cursor-pointer bg-netflix-red text-white mx-1 my-1 rounded-lg shadow-xl
+      className="p-2  dark:border border-blue-200 cursor-pointer bg-netflix-red text-white mx-1 my-1 rounded-lg shadow-xl
       text-center "
       onClick={props.onClick}
     >
@@ -24,4 +24,15 @@ const ButtonSecondary = (props) => {
   );
 };
 
-export { ButtonPrimary, ButtonSecondary };
+const ButtonDarkMode = (props) => {
+  return (
+    <button
+      className=" p-2 text-2xl font-bebas mt-1 mb-6 w-1/6 h-16 border cursor-pointer rounded-xl dark:bg-black dark:text-white bg-white text-black text-center "
+      onClick={props.onClick}
+    >
+      {props.label} {props.img}
+    </button>
+  );
+};
+
+export { ButtonPrimary, ButtonSecondary, ButtonDarkMode };
