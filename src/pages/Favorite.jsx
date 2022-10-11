@@ -21,8 +21,9 @@ function Favorite() {
 
   const delFav = (movie) => {
     const del = favorites.filter((e) => e !== movie);
+    const newList = JSON.stringify(del);
     dispatch(setFavorites(del));
-    localStorage.setItem("favMovies", del);
+    localStorage.setItem("favMovies", newList);
   };
 
   // function fetchData() {

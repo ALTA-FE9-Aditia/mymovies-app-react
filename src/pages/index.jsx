@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import { setFavorites } from "utils/redux/reducers/reducer";
 
 function App(props) {
-  // cosntructor start
+  // cosntrucytor start
   const dispatch = useDispatch();
   // nama state,nama update state,
   const [datas, setDatas] = useState([]);
