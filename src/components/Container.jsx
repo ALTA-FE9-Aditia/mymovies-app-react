@@ -1,12 +1,10 @@
 import house from "assets/cinema.png";
 import favMovie from "assets/favMovie.svg";
-import darkIc from "assets/dark_theme.svg";
 import { Link } from "react-router-dom";
-// import { useContext } from "react";
 import { ThemeContext } from "utils/context";
 import React, { useContext } from "react";
-import { ButtonPrimary } from "./Button";
 import { ButtonDarkMode } from "./Button";
+
 const Container = ({ children }) => {
   const { isLight, setIsLight } = useContext(ThemeContext);
   return (
@@ -28,10 +26,9 @@ const Container = ({ children }) => {
             <img className="w-18 h-16 " src={favMovie} alt="house-ic" />
           </Link>
           <ButtonDarkMode
-            label={isLight ? "Light" : "Dark"}
+            label={isLight ? "Light Mode" : "Dark Mode"}
             onClick={() => setIsLight(!isLight)}
-            // img={darkIc}
-          ></ButtonDarkMode>
+          />
         </div>
       </nav>
       <div className="w-full h-full overflow-auto  bg-bg-tr dark:bg-black overflow-auto">

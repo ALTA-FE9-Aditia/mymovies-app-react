@@ -27,7 +27,7 @@ const ButtonSecondary = (props) => {
 const ButtonDarkMode = (props) => {
   return (
     <button
-      className=" p-2 text-2xl font-bebas mt-1 mb-6 w-1/6 h-16 border cursor-pointer rounded-xl dark:bg-black dark:text-white bg-white text-black text-center "
+      className=" p-2 text-xl font-bebas mt-1 mb-6 w-1/6 h-16 border cursor-pointer rounded-xl dark:bg-black dark:text-white bg-white text-black text-center "
       onClick={props.onClick}
     >
       {props.label} {props.img}

@@ -7,10 +7,12 @@ import { WithRouter } from "utils/Navigation";
 import { useState, useEffect } from "react";
 import { data } from "browserslist";
 import { useTitle } from "utils/hooks/useTitle.js";
+import { useDispatch } from "react-redux";
+import { setFavorites } from "utils/redux/reducers/reducer";
 
 function App(props) {
   // cosntructor start
-
+  const dispatch = useDispatch();
   // nama state,nama update state,
   const [datas, setDatas] = useState([]);
   const [skeleton] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
@@ -52,16 +54,7 @@ function App(props) {
   }
 
   function addFav(movie) {
-    // console.log(movie.title)
-    // bikin logic supaya ga ada duplikasi difav,klo udah ada film nya kasih alert.
-    // klo ga ada push ke parsedMovies,klo ada kasih alert
-    // pake method .find()by id
-    /**if movie.id === data.id */
-    // di dalam browser locar storage ada value dan key,keynya dikasih nama
-
-    // favMovies
     const getMovies = localStorage.getItem("favMovies");
-
     if (getMovies) {
       const parsedMovies = JSON.parse(getMovies);
       const favMovie = parsedMovies.find((obj) => obj.title === movie.title);
@@ -69,9 +62,11 @@ function App(props) {
 
       parsedMovies.push(movie);
       const temp = JSON.stringify(parsedMovies);
+      dispatch(setFavorites(parsedMovies));
       localStorage.setItem("favMovies", temp);
     } else {
       const temp = JSON.stringify([movie]);
+      dispatch(setFavorites([movie]));
       localStorage.setItem("favMovies", temp);
     }
   }
